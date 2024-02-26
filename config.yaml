@@ -1,0 +1,3 @@
+topic: 'application/+/device/+/event/up'
+broker: 'iwilr4-10.campus.fh-ludwigshafen.de'
+port: 1883
