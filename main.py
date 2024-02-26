@@ -1,5 +1,6 @@
 import os.path
 
+
 import paho.mqtt.client as mqtt
 import yaml
 import random
@@ -11,6 +12,14 @@ from yaml.loader import SafeLoader
 
 with open('config.yaml') as f:
     config = yaml.load(f, Loader=SafeLoader)
+
+if os.path.isdir('error') == False:
+    error_path = os.path.join(os.getcwd(),"error")
+    os.mkdir(error_path)
+if os.path.isdir('files') == False:
+    file_path = os.path.join(os.getcwd(),"files")
+    os.mkdir(file_path)
+
 
 errorfilepath = "./error/error_{date}.txt"
 flatfilepath  = "./files/file_{date}.txt"
@@ -71,7 +80,6 @@ def on_message(client, userdata, msg):
 
 if __name__ == '__main__':
     mqttc = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2)
-    mqttc.username_pw_set(username, password)
     mqttc.on_connect = on_connect
     mqttc.on_disconnect = on_disconnect
     mqttc.on_message = on_message
